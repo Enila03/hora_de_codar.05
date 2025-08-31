@@ -3,6 +3,7 @@ programa
 
 	cadeia nome
 	inteiro op
+	inteiro senhaUser
 	real varSaldo = 150.0
 	
 	funcao inicio()
@@ -27,7 +28,10 @@ programa
 				"6. Sair\n")
 		leia(op)
 
-		escolha(op){
+		se(senha() == verdadeiro){
+
+			escolha(op){
+				
 			caso 1:
 				saldo()
 				pare
@@ -51,8 +55,29 @@ programa
 			caso 6: 
 				escreva("Encerrando programa...")
 				pare
+				
+			caso contrario:
+				escreva("ERRO: opção inválida")
+			
 		}
+			
+		} senao {
+			escreva("Acesso negado!\n")
+			senha()
+		}
+
 		
+	}
+
+	funcao logico senha(){
+		escreva("Digite sua senha:\n")
+		leia(senhaUser)
+		se(senhaUser == 3589){
+			escreva("Acesso liberado!")
+			retorne verdadeiro
+		} senao {
+			retorne falso
+		}
 	}
 
 	funcao saldo(){
@@ -78,14 +103,14 @@ programa
 		real din
 		escreva("Quanto você deseja sacar?\n")
 		leia(din)
-
-		se(din > varSaldo){
-			escreva("ERRO: Valor insuficiente! Tente novamente: ")
-			leia(din)
-		} senao {
-			varSaldo = varSaldo - din
-			saldo()
-		}
+		//fazer looping aqui
+			se(din > varSaldo){
+				escreva("ERRO: Valor insuficiente! Tente novamente: ")
+				saque()
+			} senao {
+				varSaldo = varSaldo - din
+				saldo()
+			}
 
 	}
 
@@ -110,7 +135,8 @@ programa
 		leia(pix)
 		escreva("Quanto você deseja transferir?\n")
 		leia(din)
-		
+		escreva("Você transferiu R$", din, " para ", nomeTrans)
+		choice()
 	}
 	
 }
@@ -119,7 +145,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 190; 
+ * @POSICAO-CURSOR = 1057; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
