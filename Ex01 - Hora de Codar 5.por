@@ -1,13 +1,11 @@
-programa
-{
+programa {
 
 	cadeia nome
 	inteiro op
 	inteiro senhaUser
 	real varSaldo = 150.0
 	
-	funcao inicio()
-	{
+	funcao inicio() {
 
 		escreva("Informe seu nome: ")
 		leia(nome)
@@ -17,7 +15,7 @@ programa
 		
 	}
 	
-	funcao choice(){
+	funcao choice() {
 		
 		escreva(	"Menu principal - Escolha a opção desejada:\n" +
 				"1. Ver Saldo\n"+
@@ -28,7 +26,7 @@ programa
 				"6. Sair\n")
 		leia(op)
 
-		se(senha() == verdadeiro){
+		se(senha() == verdadeiro) {
 
 			escolha(op){
 				
@@ -59,33 +57,34 @@ programa
 			caso contrario:
 				escreva("ERRO: opção inválida")
 			
-		}
+			}
 			
 		} senao {
 			escreva("Acesso negado!\n")
 			senha()
 		}
-
 		
 	}
 
-	funcao logico senha(){
+	funcao logico senha() {
 		escreva("Digite sua senha:\n")
 		leia(senhaUser)
-		se(senhaUser == 3589){
-			escreva("Acesso liberado!")
-			retorne verdadeiro
-		} senao {
-			retorne falso
+
+		enquanto(senhaUser != 3589) {
+			escreva("ERRO: senha inválida. Tente novamente:\n")
+			leia(senhaUser)
 		}
+		escreva("Acesso liberado.\n")
+		retorne verdadeiro
+		
 	}
 
-	funcao saldo(){
+	funcao saldo() {
 		escreva("Seu saldo atual é: " +varSaldo, "\n\n")
 		choice()
 	}
 
-	funcao extrato(){
+	funcao extrato() {
 		escreva(	"| Data       | Descrição              | Débito (R$)  | Crédito (R$)  | Saldo (R$)  |\n"+
 				"| ---------- | ---------------------- | ------------ | ------------- | ----------- |\n"+
 				"| 01/08/2025 | Saldo Anterior         |              |               | 500,00      |\n"+
@@ -94,38 +93,47 @@ programa
 				"| 10/08/2025 | Pagamento Conta Luz    | 100,00       |               | 600,00      |\n"+
 				"| 15/08/2025 | Saque ATM              | 300,00       |               | 300,00      |\n"+
 				"| 20/08/2025 | Transferência Recebida |              | 50,00         | 350,00      |\n"+
-				"| 21/08/2025 | Pagamento Cartão       | 200,00       |               | 150,00      |\n")
+				"| 21/08/2025 | Pagamento Cartão       | 200,00       |               | 150,00      |\n\n\n")
 		choice()
 	}
 
-	funcao saque(){
+	funcao saque() {
 		escreva("Seu saldo atual é: " +varSaldo, "\n")
 		real din
 		escreva("Quanto você deseja sacar?\n")
 		leia(din)
-		//fazer looping aqui
-			se(din > varSaldo){
-				escreva("ERRO: Valor insuficiente! Tente novamente: ")
-				saque()
-			} senao {
-				varSaldo = varSaldo - din
-				saldo()
-			}
 
+		
+		se(din > varSaldo) {
+			escreva("ERRO: Valor insuficiente! Tente novamente:\n")
+			saque()
+		} senao se (din == 0) {
+			escreva("ERRO: Valor inválido! Tente novamente:\n")
+			saque()
+		}
+		senao {
+			varSaldo = varSaldo - din
+			saldo()
+		}
 	}
 
-	funcao deposito(){
+	funcao deposito() {
 		escreva("Seu saldo atual é: " +varSaldo, "\n")
 		real din
 		escreva("Quanto você deseja depositar?\n")
 		leia(din)
 
-		varSaldo = varSaldo + din
-		saldo()
+		se (din <= 0) {
+			escreva("ERRO: Valor inválido! Tente novamente:\n")
+			deposito()
+		} senao {
+			varSaldo = varSaldo + din
+			saldo()
+		}
 		
 	}
 
-	funcao transferencia(){
+	funcao transferencia() {
 		cadeia nomeTrans
 		inteiro pix
 		real din
@@ -135,7 +143,9 @@ programa
 		leia(pix)
 		escreva("Quanto você deseja transferir?\n")
 		leia(din)
-		escreva("Você transferiu R$", din, " para ", nomeTrans)
+		escreva("Você transferiu R$", din, " para ", nomeTrans, "\n")
+		varSaldo = varSaldo - din
+		escreva("Seu saldo atual é: ", varSaldo, "\n\n")
 		choice()
 	}
 	
@@ -145,7 +155,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1057; 
+ * @POSICAO-CURSOR = 2812; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
